@@ -20,8 +20,8 @@ void month_day(int year, int yearday, int *pmonth, int *pday){
 
     int i, leap;
     if(year <=0){
-        *pmonth = 0;
-        *pday = 0;
+        printf("INVALID DATE\n");
+        exit(0);
         return;
     }
     leap = year%4 == 0 && year%100 != 0 || year%400 == 0;
@@ -33,18 +33,19 @@ void month_day(int year, int yearday, int *pmonth, int *pday){
 
     if(i > 12 && yearday > daytab[leap][12])
     {
-        *pmonth=0;
-        *pday=0;
+        printf("INVALID DATE\n");
+        exit(0);
     }
     else
     {
         *pmonth=i;
         *pday=yearday;
     }
+}
 
-    
-
-
+char *month_name(int n){
+    static char *name[] = {"Illegal month","January","February", "March","April", "May","June", "July","August", "September","October", "November","December"};
+    return name[n];
 }
 
 int main(int argc, char **argv) {
@@ -54,7 +55,8 @@ int main(int argc, char **argv) {
 
     int day,mon;
     month_day(year,yearday,&mon,&day);
-    printf("Month: %d, Day: %d\n", mon,day);
+
+    printf("%s %d, %d\n", month_name(mon),day,year);
 
 
     return 0;
