@@ -31,7 +31,7 @@ func handleConn(c net.Conn, timeZone string) {
 func main() {
 	args := os.Args[1:]
 	if len(args) != 2 {
-		fmt.Println("Wrong parameters \nExpected input: TZ= <Time Zone> go run clock2.go -port #<portNumber> ")
+		fmt.Println("Wrong parameters \nExpected input: TZ=<Time Zone> go run clock2.go -port <portNumber> ")
 		os.Exit(1)
 	}
 
@@ -47,6 +47,6 @@ func main() {
 			log.Print(err) // e.g., connection aborted
 			continue
 		}
-		go handleConn(conn) // handle connections concurrently
+		go handleConn(conn,timeZone) // handle connections concurrently
 	}
 }
